@@ -1,21 +1,100 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Заказ зеркала | monro.mirror</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #f2f2f2;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .form-box {
+      background: #ffffff;
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .form-box h2 {
+      text-align: center;
+      margin-bottom: 24px;
+      color: #333;
+      font-weight: 600;
+    }
+
+    input[type="text"],
+    input[type="tel"] {
+      width: 100%;
+      padding: 12px 16px;
+      margin-bottom: 16px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 15px;
+      transition: 0.3s;
+    }
+
+    input[type="text"]:focus,
+    input[type="tel"]:focus {
+      border-color: #111;
+      outline: none;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 14px;
+      background: #000;
+      color: #fff;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .submit-btn:hover {
+      background: #444;
+    }
+  </style>
+</head>
 <body>
-    <!-- Здесь могут быть другие элементы страницы -->
-    <div class="form-container">
-        <h2>Заказ зеркала</h2>
-        <form action="https://wa.me/79221939224?text=" method="get" target="_blank">
-            <label for="size">Размер:</label>
-            <input type="text" id="size" name="size" required placeholder="Например: 60x80">
 
-            <label for="color">Цвет:</label>
-            <input type="text" id="color" name="color" required placeholder="Например: черный">
+  <div class="form-box">
+    <h2>Оформление заказа</h2>
+    <form action="https://wa.me/79221939224" method="get" onsubmit="return sendWhatsAppMessage(event)">
+      <input type="text" id="size" placeholder="Размер (например, 60x80)" required>
+      <input type="text" id="color" placeholder="Цвет рамы (например, черный)" required>
+      <input type="text" id="address" placeholder="Адрес доставки" required>
+      <input type="tel" id="phone" placeholder="Ваш номер телефона" required>
+      <button type="submit" class="submit-btn">Отправить в WhatsApp</button>
+    </form>
+  </div>
 
-            <label for="address">Адрес доставки:</label>
-            <input type="text" id="address" name="address" required placeholder="Ваш адрес">
+  <script>
+    function sendWhatsAppMessage(event) {
+      event.preventDefault();
 
-            <label for="phone">Номер телефона:</label>
-            <input type="tel" id="phone" name="phone" required placeholder="Ваш номер">
+      const size = document.getElementById("size").value;
+      const color = document.getElementById("color").value;
+      const address = document.getElementById("address").value;
+      const phone = document.getElementById("phone").value;
 
-            <button type="submit">Отправить в WhatsApp</button>
-        </form>
-    </div>
+      const message = Здравствуйте! Хочу заказать зеркало:%0AРазмер: ${size}%0AЦвет: ${color}%0AАдрес: ${address}%0AТелефон: ${phone};
+      const url = https://wa.me/79221939224?text=${message};
+
+      window.open(url, "_blank");
+      return false;
+    }
+  </script>
+
 </body>
+</html>
